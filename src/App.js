@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import noteService from './services/blogs'
 import BlogList from './components/BlogList'
 import LoginForm from './components/LoginForm'
 
@@ -10,13 +11,14 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      // noteService.setToken(user.token)
+      noteService.setToken(user.token)
     }
   }, [])
   
   const logout = () =>{
     window.localStorage.removeItem('loggedBlogListappUser')
     setUser(null)
+    noteService.setToken('')
   }
 
   return (

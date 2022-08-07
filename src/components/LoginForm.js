@@ -2,7 +2,6 @@ import { useState } from 'react'
 import loginService  from '../services/login'
 
 const LoginForm = ({ setUser }) => {
-  // const [user, setUser] = useState({})
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
