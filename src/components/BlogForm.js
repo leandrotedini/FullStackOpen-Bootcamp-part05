@@ -10,8 +10,6 @@ const BlogForm = ({ addBlog }) => {
     event.preventDefault()
 
     const newBlog = {title, author, url}
-    
-    console.log(newBlog)
 
     try {
       const blog = await blogService.create(newBlog)

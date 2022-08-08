@@ -3,7 +3,7 @@ import blogService from '../services/blogs'
 import Blog from "./Blog"
 import BlogForm from './BlogForm'
 
-const BlogsList = () => {
+const BlogsList = ({ showNotification }) => {
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
@@ -14,6 +14,10 @@ const BlogsList = () => {
 
   const addBlog = (newBlog) => {
     setBlogs([ ...blogs, newBlog ])
+    showNotification({
+      message: `a new blog ${newBlog.title} by ${newBlog.author}`,
+      success: true
+    })
   }
 
   return <>
