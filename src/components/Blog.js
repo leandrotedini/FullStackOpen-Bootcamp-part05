@@ -23,9 +23,7 @@ const Blog = ({blog}) => {
   }
 
   const incrementLikes = (blog) => {
-
-    const likes = blog.likes + 1
-    const updatedBlog = {...blog, likes: likes }
+    const updatedBlog = {...blog, likes: likes + 1 }
 
     blogService.update(updatedBlog)
       .then(response =>  setLikes(prevState => prevState + 1))

@@ -8,18 +8,24 @@ const BlogsList = ({ showNotification }) => {
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+      setBlogs( blogs.sort(sortFunction) )
     )  
   }, [])
 
   const addBlog = (newBlog) => {
-    setBlogs([ ...blogs, newBlog ])
+    setBlogs([ ...blogs, newBlog ].sort(sortFunction))
     showNotification({
       message: `a new blog ${newBlog.title} by ${newBlog.author}`,
       success: true
     })
   }
 
+  const sortFunction = (a, b) =>{
+    if (a.likes < b.likes) return 1
+    if (a.likes > b.likes) return -1    
+
+    return 0;
+  }
   return <>
     <h2>blogs</h2>
     {blogs.map(blog =>
