@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import blogService from '../services/blogs'
-import Blog from "./Blog"
+import Blog from './Blog'
 import BlogForm from './BlogForm'
 
 const BlogsList = ({ showNotification, user }) => {
@@ -9,7 +9,7 @@ const BlogsList = ({ showNotification, user }) => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs.sort(sortFunction) )
-    )  
+    )
   }, [])
 
   const addBlog = (newBlog) => {
@@ -20,11 +20,11 @@ const BlogsList = ({ showNotification, user }) => {
     })
   }
 
-  const sortFunction = (a, b) =>{
+  const sortFunction = (a, b) => {
     if (a.likes < b.likes) return 1
-    if (a.likes > b.likes) return -1    
+    if (a.likes > b.likes) return -1
 
-    return 0;
+    return 0
   }
   return <>
     <h2>blogs</h2>
@@ -32,7 +32,7 @@ const BlogsList = ({ showNotification, user }) => {
       <Blog key={blog.id} blog={blog} user={user}/>
     )}
     <BlogForm addBlog={addBlog}/>
-    </>
+  </>
 }
 
 export default BlogsList

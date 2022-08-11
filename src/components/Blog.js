@@ -1,7 +1,7 @@
-import { useState } from "react"
+import React, { useState } from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({blog, user}) => {
+const Blog = ({ blog, user }) => {
 
   const [ visible, setVisible ] = useState(false)
   const [ likes, setLikes ] = useState(blog.likes)
@@ -16,7 +16,6 @@ const Blog = ({blog, user}) => {
   }
 
   const showWhenVisible = { display: visible ? '' : 'none' }
-  
   let buttonName = visible ? 'hide' : 'view'
 
   const toggleVisibility = () => {
@@ -24,25 +23,25 @@ const Blog = ({blog, user}) => {
   }
 
   const incrementLikes = (blog) => {
-    const updatedBlog = {...blog, likes: likes + 1 }
+    const updatedBlog = { ...blog, likes: likes + 1 }
 
     blogService.update(updatedBlog)
-      .then(response =>  setLikes(prevState => prevState + 1))
+      .then( () =>  setLikes(prevState => prevState + 1))
       .catch(e => console.log(e))
   }
 
   const deleteBlog = blog => {
     if (window.confirm(`Remove ${blog.title}`)) {
       blogService.deleteBlog(blog)
-      .then(response =>  setDeletedBlog(true))
-      .catch(e => console.log(e))
-    } 
+        .then(() =>  setDeletedBlog(true))
+        .catch(e => console.log(e))
+    }
   }
 
   return (
-    deletedBlog 
-    ? null
-    : <div style={blogStyle}>
+    deletedBlog
+      ? null
+      : <div style={blogStyle}>
         <p>{blog.title} <button onClick={toggleVisibility}>{buttonName}</button></p>
         <div style={showWhenVisible}>
           <p>{blog.url}</p>

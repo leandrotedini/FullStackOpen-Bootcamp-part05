@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import loginService  from '../services/login'
 import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
@@ -10,14 +10,14 @@ const LoginForm = ({ setUser, showNotification }) => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    
+
     try {
       const user = await loginService.login({
         username, password,
       })
       window.localStorage.setItem(
         'loggedBlogListappUser', JSON.stringify(user)
-      ) 
+      )
       setUser(user)
       setUsername('')
       setPassword('')
@@ -35,7 +35,7 @@ const LoginForm = ({ setUser, showNotification }) => {
     <form onSubmit={handleLogin}>
       <div>
         username
-          <input
+        <input
           type="text"
           value={username}
           name="Username"
@@ -44,7 +44,7 @@ const LoginForm = ({ setUser, showNotification }) => {
       </div>
       <div>
         password
-          <input
+        <input
           type="password"
           value={password}
           name="Password"
