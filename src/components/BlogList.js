@@ -3,7 +3,7 @@ import blogService from '../services/blogs'
 import Blog from "./Blog"
 import BlogForm from './BlogForm'
 
-const BlogsList = ({ showNotification }) => {
+const BlogsList = ({ showNotification, user }) => {
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const BlogsList = ({ showNotification }) => {
   return <>
     <h2>blogs</h2>
     {blogs.map(blog =>
-      <Blog key={blog.id} blog={blog} />
+      <Blog key={blog.id} blog={blog} user={user}/>
     )}
     <BlogForm addBlog={addBlog}/>
     </>

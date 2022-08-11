@@ -39,7 +39,7 @@ const App = () => {
       : <>
         <p>{`${user.name} logged in`}</p>
         <button onClick={logout}>Logout</button>
-        <BlogList showNotification={showNotification}/>
+        <BlogList showNotification={showNotification} user={user}/>
       </>
       }
     </div>

@@ -1,10 +1,11 @@
 import { useState } from "react"
 import blogService from '../services/blogs'
 
-const Blog = ({blog}) => {
+const Blog = ({blog, user}) => {
 
   const [ visible, setVisible ] = useState(false)
   const [ likes, setLikes ] = useState(blog.likes)
+  const [ deletedBlog, setDeletedBlog ] = useState(false)
 
   const blogStyle = {
     paddingTop: 10,
@@ -30,15 +31,26 @@ const Blog = ({blog}) => {
       .catch(e => console.log(e))
   }
 
+  const deleteBlog = blog => {
+    if (window.confirm(`Remove ${blog.title}`)) {
+      blogService.deleteBlog(blog)
+      .then(response =>  setDeletedBlog(true))
+      .catch(e => console.log(e))
+    } 
+  }
+
   return (
-    <div style={blogStyle}>
-      <p>{blog.title} <button onClick={toggleVisibility}>{buttonName}</button></p>
-      <div style={showWhenVisible}>
-        <p>{blog.url}</p>
-        <p>likes {likes}<button onClick={() => incrementLikes(blog)}>like</button></p>
-        <p>{blog.author}</p>
+    deletedBlog 
+    ? null
+    : <div style={blogStyle}>
+        <p>{blog.title} <button onClick={toggleVisibility}>{buttonName}</button></p>
+        <div style={showWhenVisible}>
+          <p>{blog.url}</p>
+          <p>likes {likes}<button onClick={() => incrementLikes(blog)}>like</button></p>
+          <p>{blog.author}</p>
+          { blog.user.username === user.username && <div><button onClick={() => deleteBlog(blog)}>remove</button></div> }
+        </div>
       </div>
-    </div>
   )
 }
 
