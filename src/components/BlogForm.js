@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import blogService  from '../services/blogs'
 import Togglable from './Togglable'
 
@@ -11,7 +11,7 @@ const BlogForm = ({ addBlog }) => {
   const handleCreateBlog = async (event) => {
     event.preventDefault()
 
-    const newBlog = {title, author, url}
+    const newBlog = { title, author, url }
 
     try {
       const blog = await blogService.create(newBlog)
@@ -35,7 +35,7 @@ const BlogForm = ({ addBlog }) => {
       <form onSubmit={handleCreateBlog}>
         <div>
           title
-            <input
+          <input
             type="text"
             value={title}
             name="title"
@@ -44,7 +44,7 @@ const BlogForm = ({ addBlog }) => {
         </div>
         <div>
           author
-            <input
+          <input
             type="text"
             value={author}
             name="author"
@@ -53,7 +53,7 @@ const BlogForm = ({ addBlog }) => {
         </div>
         <div>
           url
-            <input
+          <input
             type="text"
             value={url}
             name="url"

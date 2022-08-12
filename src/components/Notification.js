@@ -1,3 +1,4 @@
+import React from 'react'
 const Notification = ({ message, success }) => {
 
   const notificationStyle = {
