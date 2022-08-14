@@ -80,4 +80,13 @@ describe('Blog', () => {
     expect(author).toBeVisible()
     expect(likes).toBeVisible()
   })
+
+  test('likes button called', () => {
+
+    //i don't know how resolve this exercise.
+    //The information that i've found on internet says that i can't bind the
+    //'mock Function' with my internal function 'incrementLikes' in my component Blog.
+    //https://stackoverflow.com/questions/69044787/react-testing-library-mocking-a-function
+
+  })
 })
