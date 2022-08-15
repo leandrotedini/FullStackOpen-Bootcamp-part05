@@ -15,7 +15,7 @@ describe('Blog app', function() {
   })
 })
 
-describe('when logged in', function() {
+describe('Login', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
     cy.createUser({ ...validUser, name: 'TestName' })
@@ -41,5 +41,32 @@ describe('when logged in', function() {
 
     cy.contains('invalid username or password')
       .should('have.css', 'color', 'rgb(255, 0, 0)')
+  })
+})
+
+describe('When logged in', function() {
+  beforeEach(function() {
+    cy.request('POST', 'http://localhost:3003/api/testing/reset')
+    cy.createUser({ ...validUser, name: 'TestName' })
+    cy.login(validUser)
+    cy.visit('http://localhost:3000')
+  })
+
+  it('A blog can be created', function() {
+
+    const newBlog = {
+      title: 'Test title',
+      author: 'Test author',
+      url: 'www.testurl.com'
+    }
+
+    cy.contains('new blog').click()
+    cy.get('[data-test-id="blog-form"] input[name="title"]').type(newBlog.title)
+    cy.get('[data-test-id="blog-form"] input[name="author"]').type(newBlog.author)
+    cy.get('[data-test-id="blog-form"] input[name="url"]').type(newBlog.url)
+    cy.get('[data-test-id="blog-form"]').contains('create').click()
+
+    cy.contains(`a new blog ${newBlog.title} by ${newBlog.author}`)
+      .should('have.css', 'color', 'rgb(0, 128, 0)')
   })
 })
