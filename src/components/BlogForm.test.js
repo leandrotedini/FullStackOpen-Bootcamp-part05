@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
-import { prettyDOM, waitFor } from '@testing-library/dom'
+import { waitFor } from '@testing-library/dom'
 import BlogForm from './BlogForm'
 import loginUser from '../utils/test_helper'
 
