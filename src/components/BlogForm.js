@@ -32,7 +32,7 @@ const BlogForm = ({ addBlog }) => {
   return <>
     <Togglable buttonLabel={'new blog'} ref={blogFormRef} >
       <h2>create new</h2>
-      <form onSubmit={handleCreateBlog}>
+      <form data-test-id="blog-form" onSubmit={handleCreateBlog}>
         <div>
           <label>Title:
             <input
