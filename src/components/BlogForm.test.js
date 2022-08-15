@@ -38,8 +38,5 @@ describe('<BlogForm /> ', () => {
 
     fireEvent.submit(form)
     await waitFor(() => expect(createBlog.mock.calls).toHaveLength(1))
-    // await waitFor(() => expect(createBlog.mock.calls[0][0].content).toBe('Test title' ))
-    // expect(createBlog.mock.calls).toHaveLength(1)
-    // expect(createBlog.mock.calls[0][0].content).toBe('Test title' )
   })
 })
