@@ -11,5 +11,6 @@ module.exports = defineConfig({
   env: {
     validUsername: process.env.validUsername,
     validPassword: process.env.validPassword,
+    API_PORT:process.env.API_PORT
   }
 });

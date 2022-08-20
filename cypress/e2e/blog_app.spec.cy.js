@@ -69,4 +69,21 @@ describe('When logged in', function() {
     cy.contains(`a new blog ${newBlog.title} by ${newBlog.author}`)
       .should('have.css', 'color', 'rgb(0, 128, 0)')
   })
+
+  it('like a blog', function() {
+
+    const newBlog = {
+      title: 'Test title',
+      author: 'Test author',
+      url: 'www.testurl.com'
+    }
+
+    cy.createBlog(newBlog)
+    cy.visit('http://localhost:3000')
+
+    cy.contains('view').click()
+    cy.contains('Likes: 0').as('likesCounter')
+    cy.contains('button', 'like').click()
+    cy.get('@likesCounter').should('contain', 'Likes: 1')
+  })
 })
