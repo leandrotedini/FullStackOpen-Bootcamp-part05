@@ -86,4 +86,43 @@ describe('When logged in', function() {
     cy.contains('button', 'like').click()
     cy.get('@likesCounter').should('contain', 'Likes: 1')
   })
+
+  it('like a blog', function() {
+    const secondUser = {
+      username: 'secondUser',
+      password: 'secondpass'
+    }
+
+    const firstUserBlog = {
+      title: 'First Test title',
+      author: 'First Test author',
+      url: 'www.testurl1.com'
+    }
+
+    const secondUserBlog = {
+      title: 'Second Test title',
+      author: 'Second Test author',
+      url: 'www.testurl2.com'
+    }
+
+    cy.createBlog(firstUserBlog)
+    cy.logout()
+
+    cy.createUser({ ...secondUser, name: 'Second Test Name' })
+    cy.login(secondUser)
+    cy.createBlog(secondUserBlog)
+
+    cy.visit('http://localhost:3000')
+
+    cy.contains('First Test title').find('button').click()
+    cy.contains('Author: First Test author').parent().as('firstContainer')
+    cy.get('@firstContainer').find('button').should('not.exist')
+
+    cy.contains('Second Test title').find('button').click()
+    cy.contains('Author: Second Test author').parent().as('secondContainer')
+    cy.get('@secondContainer').find('button').click()
+
+    cy.contains('First Test title').should('exist')
+    cy.contains('Second Test title').should('not.exist')
+  })
 })

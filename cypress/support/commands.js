@@ -14,6 +14,10 @@ Cypress.Commands.add('login', ({ username, password }) => {
   })
 })
 
+Cypress.Commands.add('logout', () => {
+  window.localStorage.removeItem('loggedBlogListappUser')
+})
+
 Cypress.Commands.add('createBlog', ({ title, author, url }) => {
   cy.request({
     url: `http://localhost:${API_PORT}/api/blogs`,
