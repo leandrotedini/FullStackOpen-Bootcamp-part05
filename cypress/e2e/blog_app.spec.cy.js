@@ -87,7 +87,7 @@ describe('When logged in', function() {
     cy.get('@likesCounter').should('contain', 'Likes: 1')
   })
 
-  it('like a blog', function() {
+  it('remove a blog', function() {
     const secondUser = {
       username: 'secondUser',
       password: 'secondpass'
@@ -124,5 +124,58 @@ describe('When logged in', function() {
 
     cy.contains('First Test title').should('exist')
     cy.contains('Second Test title').should('not.exist')
+  })
+
+  it('order of blogs by likes number', function() {
+
+    const firstBlog = {
+      title: 'First Test title',
+      author: 'First Test author',
+      url: 'www.testurl1.com',
+      likes: 1
+    }
+
+    const secondBlog = {
+      title: 'Second Test title',
+      author: 'Second Test author',
+      url: 'www.testurl2.com',
+      likes: 2
+    }
+
+    const thirthBlog = {
+      title: 'Thirth Test title',
+      author: 'Thirth Test author',
+      url: 'www.testurl3.com',
+      likes: 3
+    }
+
+    const fourthBlog = {
+      title: 'Fourth Test title',
+      author: 'Fourth Test author',
+      url: 'www.testurl4.com',
+      likes: 4
+    }
+
+    cy.createBlog(firstBlog)
+    cy.createBlog(secondBlog)
+    cy.createBlog(thirthBlog)
+    cy.createBlog(fourthBlog)
+
+    cy.visit('http://localhost:3000')
+
+    cy.wait(2000)
+    cy.get('[data-test-id="blog-list"]').as('blogList')
+
+    cy.get('@blogList').within(() => {
+      cy.get('div')
+        .first()
+        .should('to.contain', 'Fourth Test title')
+        .next()
+        .should('to.contain', 'Thirth Test title')
+        .next()
+        .should('to.contain', 'Second Test title')
+        .next()
+        .should('to.contain', 'First Test title')
+    })
   })
 })
