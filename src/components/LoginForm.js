@@ -32,7 +32,7 @@ const LoginForm = ({ setUser, showNotification }) => {
 
   return <>
     <h2>log in to application</h2>
-    <form onSubmit={handleLogin}>
+    <form data-test-id='login-form' onSubmit={handleLogin}>
       <div>
         username
         <input
